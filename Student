@@ -15,13 +15,13 @@ int main()
 {
    int number;
    struct Student std[20];
+   printf("Moi nhap so luong hoc vien: ");
+   scanf("%d",&number);
    InputStudent(std,number);
    OutputStudent(std,number);
 }
 
 void InputStudent(struct Student std[], int number){
-    printf("Moi nhap so luong hoc vien: ");
-    scanf("%d",&number);
     for(int i = 0;i<number;i++){
         printf("Nhap sinh vien thu %d\n",i+1);
         printf("Ma so: ");
