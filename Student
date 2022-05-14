@@ -13,7 +13,7 @@ void OutputStudent(struct Student std[], int number);
 
 int main()
 {
-   int number=0;
+   int number;
    struct Student std[20];
    InputStudent(std,number);
    OutputStudent(std,number);
@@ -21,18 +21,18 @@ int main()
 
 void InputStudent(struct Student std[], int number){
     printf("Moi nhap so luong hoc vien: ");
-    scanf_s("%d",&number);
+    scanf("%d",&number);
     for(int i = 0;i<number;i++){
         printf("Nhap sinh vien thu %d\n",i+1);
         printf("Ma so: ");
-        scanf_s("%d",&std[i].ID);
+        scanf("%d%*c",&std[i].ID);
         fflush(stdin);
         printf("Ho ten: ");
         gets(std[i].Name);
         printf("Email: ");
         gets(std[i].Email);
         printf("Score: ");
-        scanf_s("%f",&std[i].Score);
+        scanf("%f",&std[i].Score);
     }
 }
 
