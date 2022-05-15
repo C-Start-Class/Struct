@@ -87,9 +87,10 @@ void OutputStudent(struct Student std[], int number){
         printLine2();
     }
 }
+
 void saveFile(struct Student std[], int size){
     FILE *f;
-    f = fopen("X:\\Test\\Data","w");
+    f = fopen("X:\\Test\\std.txt","w");
     if(f==NULL){
     	printf("Khong tao duoc file");
     	return;
@@ -103,6 +104,22 @@ void saveFile(struct Student std[], int size){
 	}
 	fclose(f);
 }
+void readFile(char filePath[]){
+	FILE *f;
+	f = fopen(filePath,"r");
+	if(f == NULL){
+		printf("Doc file bi loi");
+		return;
+	}
+	struct Student std[100];
+	int i = 0;
+	while(fread(&std[i],sizeof(struct Student),1,f)){
+		i++;	
+	}
+	fclose(f);
+	
+	printf("\n%d\n",i);
+}
 int main()
 {
     int number;
@@ -113,5 +130,6 @@ int main()
     printTitle();
     OutputStudent(std,number);
     saveFile(std,number);
+    readFile("X:\\Test\\std.txt");
 }
 
