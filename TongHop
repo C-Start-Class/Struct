@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <string.h>
 
-struct Student {
-    char name[100];
-    char namsinh[100];
-    char gioitinh[100];
+struct Student{
+  char name[100];
+  char namsinh[100];
+  char gioitinh[100];
 };
-void InputStudent(struct Student std[], int number) {
-    for (int i = 0; i < number; i++) {
-        printf("Thong tin hoc vien thu %d\n", i + 1);
+void InputStudent(struct Student std[], int number){
+    for(int i = 0;i<number;i++){
+        printf("Thong tin hoc vien thu %d\n",i+1);
         printf("Ho va ten: ");
         gets(std[i].name);
         fflush(stdin);
@@ -19,99 +19,99 @@ void InputStudent(struct Student std[], int number) {
     }
 }
 
-char* line(char c, int len) {
+char* line(char c,int len){
     static char s[1000];
-    for (int i = 0; i < len; i++) {
-        s[i] = c;
+    for(int i = 0; i<len;i++){
+        s[i]=c;
     }
-    s[len] = '\0';
+    s[len]='\0';
     return s;
 }
 
-char* center(char s[], int len) {
-    int llen = (len - strlen(s)) / 2;
+char* center(char s[], int len){
+    int llen = (len - strlen(s))/2;
     static char s_new[1000];
-    for (int i = 0; i < llen; i++) {
+    for(int i = 0; i < llen;i++){
         s_new[i] = 32;
     }
-    for (int i = 0; i < strlen(s); i++) {
-        s_new[llen + i] = s[i];
+    for(int i = 0; i < strlen(s);i++){
+        s_new[llen+i]=s[i];
     }
-    for (int i = llen + strlen(s); i < len; i++) {
-        s_new[i] = 32;
+    for(int i = llen + strlen(s);i<len;i++){
+        s_new[i]=32;
     }
     s_new[len] = '\0';
     return s_new;
 }
 
-char* leftscan(char s[], int len) {
+char* leftscan(char s[], int len){
     static char s_new[1000];
-    for (int i = 0; i < strlen(s); i++) {
-        s_new[i] = s[i];
+    for(int i = 0; i < strlen(s);i++){
+        s_new[i]=s[i];
     }
-    for (int i = strlen(s); i < len; i++) {
-        s_new[i] = 32;
+    for(int i = strlen(s);i<len;i++){
+        s_new[i]=32;
     }
     s_new[len] = '\0';
     return s_new;
 }
-void printLine() {
-    printf("%c%s%c", '*', line('=', 42), '*');
-    printf("%s%c", line('=', 12), '*');
-    printf("%s%c", line('=', 12), '*');
+void printLine(){
+    printf("%c%s%c",'*',line('=',42),'*');
+    printf("%s%c",line('=',12),'*');
+    printf("%s%c",line('=',12),'*');
 }
-void printLine2() {
-    printf("%c%s%c", '*', line('-', 42), '*');
-    printf("%s%c", line('-', 12), '*');
-    printf("%s%c", line('-', 12), '*');
+void printLine2(){
+    printf("%c%s%c",'*',line('-',42),'*');
+    printf("%s%c",line('-',12),'*');
+    printf("%s%c",line('-',12),'*');
 }
 
-void printTitle() {
-    char title[][10] = { "Ho va ten","Nam sinh","Gioi tinh" };
-
+void printTitle(){
+    char title[][10] = {"Ho va ten","Nam sinh","Gioi tinh"};
+    
     printLine();
-
-    printf("\n| %s |", center(title[0], 40));
-    printf(" %s |", center(title[1], 10));
-    printf(" %s |\n", center(title[2], 10));
-
+    
+    printf("\n| %s |",center(title[0],40));
+    printf(" %s |",center(title[1],10));
+    printf(" %s |\n",center(title[2],10));
+    
     printLine();
-
+    
 }
 
-void OutputStudent(struct Student std[], int number) {
-    for (int i = 0; i < number; i++) {
-        printf("\n| %s |", leftscan(std[i].name, 40));
-        printf(" %s |", center(std[i].namsinh, 10));
-        printf(" %s |\n", center(std[i].gioitinh, 10));
+void OutputStudent(struct Student std[], int number){
+    for(int i = 0; i < number;i++){
+        printf("\n| %s |",leftscan(std[i].name,40));
+        printf(" %s |",center(std[i].namsinh,10));
+        printf(" %s |\n",center(std[i].gioitinh,10));
         printLine2();
     }
 }
-void saveFile(struct Student std[], int size) {
-    FILE* f;
-    f = fopen("C:\\Users\\MAY 1\\Desktop\\Test", "w");
-    if (f == NULL) {
-        printf("Khong tao duoc file");
-        return;
-    }
-    for (int i = 0; i < size; i++) {
-        fwrite(&std[i], sizeof(struct Student), 1, f);
-        if (fwrite == 0) {
-            printf("Luu noi dung hoc sinh khong thanh cong");
-            return;
-        }
-    }
-    fclose(f);
+void saveFile(struct Student std[], int size){
+    FILE *f;
+    f = fopen("X:\\Test\\Data","w");
+    if(f==NULL){
+    	printf("Khong tao duoc file");
+    	return;
+	}
+	for(int i=0;i<size;i++){
+		fwrite(&std[i], sizeof(struct Student),1,f);
+		if(fwrite == 0){
+			printf("Luu noi dung hoc sinh khong thanh cong");
+			return;
+		}
+	}
+	fclose(f);
 }
 int main()
 {
     int number;
     struct Student std[20];
     printf("Moi nhap so luong hoc vien: ");
-    scanf("%d%*c", &number);
-    InputStudent(std, number);
+    scanf("%d%*c",&number);
+    InputStudent(std,number);
     printTitle();
-    OutputStudent(std, number);
-    saveFile(std, number);
+    OutputStudent(std,number);
+    saveFile(std,number);
 }
 
