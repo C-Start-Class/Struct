@@ -17,17 +17,17 @@ void printTitle();
 void OutputStudent(struct Student std[], int number);
 void saveFile(struct Student std[], int size);
 void readFile(char filePath[]);
+int Menu(int mode);
 
 int main()
 {	
-	int mode;
-	RETURN: printf("\nMoi ban chon mode: ");
-	scanf("%d",&mode);
+	RETURN: int mode = Menu(mode);
 	switch(mode)
 	{
 		case 1:
 			printf("---Load Data Mode---\n");
 			readFile("D:\\Test\\qlhs.dat");
+			printf("\n");
 			goto RETURN;
 		case 2:
 			printf("---Input Data Mode---\n");
@@ -36,15 +36,18 @@ int main()
     		printf("Moi nhap so luong hoc vien: ");
     		scanf("%d%*c",&number);
     		InputStudent(std,number);
+    		printf("\n");
     		goto RETURN;
     	case 3:
     		printf("---Output Data Mode---\n");
     		printTitle();
    			OutputStudent(std,number);
+   			printf("\n");
    			goto RETURN;
    		case 4:
    			printf("---Save Data Mode---\n");
    			saveFile(std,number);
+   			printf("\n");
    			goto RETURN;
    		case 5:
    			printf("---Exit---\n");
@@ -103,28 +106,27 @@ char* leftscan(char s[], int len){
     return s_new;
 }
 
-void printLine(){
-    printf("%c%s%c",'*',line('=',42),'*');
-    printf("%s%c",line('=',12),'*');
-    printf("%s%c",line('=',12),'*');
+void printLine(char c){
+    printf("%c%s%c",'*',line(c,42),'*');
+    printf("%s%c",line(c,12),'*');
+    printf("%s%c",line(c,12),'*');
 }
 
-void printLine2(){
-    printf("%c%s%c",'*',line('-',42),'*');
-    printf("%s%c",line('-',12),'*');
-    printf("%s%c",line('-',12),'*');
+void printLine1(char c){
+    printf("%c%s%c",'*',line(c,12),'*');
+    printf("%s%c",line(c,42),'*');
 }
 
 void printTitle(){
     char title[][10] = {"Ho va ten","Nam sinh","Gioi tinh"};
     
-    printLine();
+    printLine('=');
     
     printf("\n| %s |",center(title[0],40));
     printf(" %s |",center(title[1],10));
     printf(" %s |\n",center(title[2],10));
     
-    printLine();
+    printLine('=');
     
 }
 
@@ -133,7 +135,7 @@ void OutputStudent(struct Student std[], int number){
         printf("\n| %s |",leftscan(std[i].name,40));
         printf(" %s |",center(std[i].namsinh,10));
         printf(" %s |\n",center(std[i].gioitinh,10));
-        printLine2();
+        printLine('-');
     }
 }
 
@@ -171,4 +173,20 @@ void readFile(char filePath[]){
 	printTitle();
     OutputStudent(std,i);	
 }
-
+int Menu(int mode){
+	char title[][10] = {"Mode","Chuc nang"};
+	char titleMode[][10] = {"1","2","3","4","5"};
+	char titleMenu[][1000] = {"Load Data","Input Data","In danh sach hoc sinh","Luu thong tin hoc sinh","Thoat"};
+	printLine1('=');
+    printf("\n| %s |",center(title[0],10));
+    printf(" %s |\n",center(title[1],40));
+    printLine1('=');
+    for(int i = 0; i < 5;i++){
+        printf("\n| %s |",center(titleMode[i],10));
+        printf(" %s |\n",center(titleMenu[i],40));
+        printLine1('-');
+    }
+	printf("\nMoi ban chon mode: ");
+	scanf("%d",&mode);
+	return mode;
+}
